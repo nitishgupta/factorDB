@@ -2,6 +2,8 @@ package postProcessing;
 import java.io.*;
 import java.util.*;
 
+import logisticCMF.embedding;
+
 
 public class EntityEmbeddings {
 	

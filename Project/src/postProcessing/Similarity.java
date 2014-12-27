@@ -5,6 +5,8 @@ import java.io.*;
 
 public class Similarity {
 	
+	public Map<String, ArrayList<String>> simMap;
+	
 	public Map<String, ArrayList<String>> KNN(EntityEmbeddings a, EntityEmbeddings b, int K){
 		Map<String, ArrayList<String>> kNN = new HashMap<String, ArrayList<String>>();
 		for(String en1 : a.entityVector.keySet()){
@@ -21,9 +23,11 @@ public class Similarity {
 		return kNN;
 	}
 	
-	public Map<String, ArrayList<String>> getSimilarity(EntityEmbeddings ee1, EntityEmbeddings ee2){
-		Map<String, ArrayList<String>> simMap = KNN(ee1, ee2, 20);
-		
+	public void getSimilarity(EntityEmbeddings ee1, EntityEmbeddings ee2, int K){
+		simMap = KNN(ee1, ee2, K);
+	}
+	
+	public void printSimMap(){
 		for(String en : simMap.keySet()){
 			System.out.print(en + " : ");
 			for(String nn : simMap.get(en)){
@@ -31,27 +35,7 @@ public class Similarity {
 			}
 			System.out.println();
 		}
-		
-		return simMap;
 	}
 	
 	
-	public static void main(String [] args) throws IOException {
-		String folder = "AZ";
-		String evaluation = "HeldOut";
-		System.out.println("Start");
-		
-		EntityEmbeddings attributes = new EntityEmbeddings(folder, evaluation+"/"+"attributes-bw", 30);
-		EntityEmbeddings words = new EntityEmbeddings(folder, evaluation+"/"+"words-bw", 30);
-		EntityEmbeddings categories = new EntityEmbeddings(folder, evaluation+"/"+"categories-bw", 30);
-		EntityEmbeddings business = new EntityEmbeddings(folder, evaluation+"/"+"business-bw", 30);
-		
-		Similarity s = new Similarity();
-		s.getSimilarity(categories, words);
-		
-		
-		
-		
-	}
-
 }

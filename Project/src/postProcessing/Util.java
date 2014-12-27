@@ -1,4 +1,5 @@
 package postProcessing;
+import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -55,8 +56,51 @@ public class Util {
             System.out.println(entry.getKey() + "  ==== " + entry.getValue());*/
 	}
 	
-	public static void writeSelectEmbeddingsToFile(String folder, String selectionEmbeddings, Map<String, ArrayList<String>> simMap){
+	public static Set<String> readEntitiesForTSNE(String fileAddress) throws IOException{
+		Set<String> entities = new HashSet<String>();
+		BufferedReader br = new BufferedReader(new FileReader(fileAddress));
+		String line;
+		while((line = br.readLine()) != null){
+			String en = line.trim();
+			entities.add(en);
+		}
+		
+		return entities;
 		
 	}
 
+	public static Set<String> getKNNEntities(Set<String> sourceEntities, Similarity s){
+		Set<String> targetEntities = new HashSet<String>();
+		
+		for(String e1 : sourceEntities){
+			for(String e2 : s.simMap.get(e1)){
+				targetEntities.add(e2);
+			}
+		}
+		return targetEntities;
+	}
+	
+	public static void writeEmbeddingsForSet(Set<String> entitiesToWrite, EntityEmbeddings ee, String writePath) throws IOException{
+		BufferedWriter bw = new BufferedWriter(new FileWriter(writePath));
+		for(String entity : entitiesToWrite){
+			bw.write(entity + " :: ");
+			for(int i=0; i<ee.entityVector.get(entity).length; i++){
+				bw.write(ee.entityVector.get(entity)[i] + ", ");
+			}
+			bw.write("\n");
+		}
+		bw.close();
+	}
+	
+	public static void writeSimilarEntities(Set<String> e1sToWrite, Map<String, ArrayList<String>> simMap, String writePath) throws IOException{
+		BufferedWriter bw = new BufferedWriter(new FileWriter(writePath));
+		for(String entity : e1sToWrite){
+			bw.write(entity + "\t");
+			for(String e2 : simMap.get(entity)){
+				bw.write(e2 + "\t");
+			}
+			bw.write("\n");
+		}
+		bw.close();
+	}
 }
