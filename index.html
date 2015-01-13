@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Factordb : ">
+    <meta name="description" content="factorDB : Collective Factorization for Relational Data">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Factordb</title>
+    <title>factorDB</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/nitishgupta/factorDB">View on GitHub</a>
 
-          <h1 id="project_title">Factordb</h1>
-          <h2 id="project_tagline"></h2>
+          <h1 id="project_title">factorDB</h1>
+          <h2 id="project_tagline">Collective Factorization for Relational Data</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/nitishgupta/factorDB/zipball/master">Download this project as a .zip file</a>
@@ -34,41 +34,6 @@
         <h1>
 <a id="collective-factorization-for-relational-data-an-evaluation-on-the-yelp-datasets" class="anchor" href="#collective-factorization-for-relational-data-an-evaluation-on-the-yelp-datasets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Collective Factorization for Relational Data: An Evaluation on the Yelp Datasets</h1>
 
-<h3>
-<a id="what-is-this-repository-for" class="anchor" href="#what-is-this-repository-for" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is this repository for?</h3>
-
-<ul>
-<li>Yelp Dataset Challenge
-
-<ul>
-<li>Parse Yelp Json format data to get required data in the required format</li>
-<li>Perform logisitc CMF on the parsed data to predict relations.</li>
-</ul>
-</li>
-</ul>
-
-<h3>
-<a id="details-on-logistic-cmf-code" class="anchor" href="#details-on-logistic-cmf-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Details on Logistic CMF Code</h3>
-
-<ul>
-<li>
-<p>This Java project currently has 2 packages : </p>
-
-<ul>
-<li>yelpDataProcessing - Contains classes/functions to read the yelp dataset in json format and parse to get different data in required format.</li>
-<li>logisticCMF - Contains classes/functions to read data produced in required format and then split train/validation/test data. Learn the embeddings for entities and print prediction evaluation.</li>
-</ul>
-</li>
-<li>
-<p>The folder PythonSCript contains a file cleantext.py that reads the yelp review data in user format and pre-processes the text review.</p>
-
-<ul>
-<li>The text pre-processing contains tokenization, stemming, removal of stop words and punctuations. </li>
-<li>Each word is kept only once if occurs multiple times in a review.</li>
-</ul>
-</li>
-</ul>
-
 <h4>
 <a id="project-contributors" class="anchor" href="#project-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Contributors</h4>
 
@@ -76,13 +41,29 @@
 <li>Nitish Gupta</li>
 <li>Sameer Singh</li>
 </ul>
+
+<h1>
+<a id="collective-factorization-for-relational-data" class="anchor" href="#collective-factorization-for-relational-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Collective Factorization for Relational Data</h1>
+
+<p>In this project we present a collective factorization framework for relational data to predict all relations in the database by collectively modelling all relations in the database, even though they maybe inaccurate and partially-observed. </p>
+
+<ul>
+<li><p>The model is able to incorporate observed information from all the relations while also predicting relations of interest by learning a set of entity factors that are shared across all relations. Collective modelling relations is also especially useful for cold-start estimation for entities with no observed data for the relation being predicted.</p></li>
+<li><p>As our model embeds all the entities in the same latent-space, it is able to compute similarity between entities that do not participate in the same relation in the database schema.</p></li>
+<li><p>We use the probabilistic interpretation of matrix factorization and learn model parameters by maximizing the log-likelihood of the observed data.</p></li>
+<li><p>We demonstrate the efficacy of our collective factorization model on relation prediction, cold-start estimation and entity similarity estimation by evaluating on the <a href="http://www.yelp.com/dataset_challenge">Yelp Datasets</a>.</p></li>
+</ul>
+
+<h3>
+<a id="the-report-for-the-project-can-be-found-here" class="anchor" href="#the-report-for-the-project-can-be-found-here" aria-hidden="true"><span class="octicon octicon-link"></span></a>The report for the project can be found <a href="http://nitishgupta.github.io/docs/gupta-factordb.pdf">here</a>
+</h3>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Factordb maintained by <a href="https://github.com/nitishgupta">nitishgupta</a></p>
+        <p class="copyright">factorDB maintained by <a href="https://github.com/nitishgupta">nitishgupta</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
