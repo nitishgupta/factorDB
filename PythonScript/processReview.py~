@@ -10,6 +10,10 @@
 
 ##### OUTPUTS the file in the same order, but tokenizes, removes punctuatuations, removes stop words and stems the words before outputing. Also each word in review occurs once in output.
 
+## Run from repo folder using
+# python PythonScripts/processReview.py option
+# option : all for processing four dataset(takes huge time)
+#	   ON  for eg. processing only ON (or any dataset for that matter of fact)		
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -93,6 +97,7 @@ option = sys.argv[1]
 folders = ['EDH', 'AZ', 'ON', 'NV', 'WI']
 if(option == 'all'):
 	for folder in folders:
+		print folder, "processing"
 		processData(folder)	
 else:
 	processData(option)

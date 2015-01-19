@@ -634,7 +634,7 @@ public class codeTest {
 	}
 	
 	// To test one dataset completely and write embeddings for (A + R + C + W)
-	public static void main(String [] args) throws Exception {
+	/*public static void main(String [] args) throws Exception {
 		String folder = args[0];
 		String todo = args[1];
 		todo = "heldOut";
@@ -650,27 +650,29 @@ public class codeTest {
 			performRateUserColdEvaluation(folder);
 		//attBusColdEvaluations(folder);
 		//rateBusColdEvaluations(folder);
-	}
+	}*/
+	
+	
 	
 	// To make the sizes table
-		/*public static void main(String [] args) throws Exception {
+		public static void main(String [] args) throws Exception {
 			
-			String folder = "WI";
-			data A = readAttributes(folder, 15.0, 15.0, false, 0);
+			String folder = "EDH";
+			data A = readAttributes(folder, 0.0, 0.0, false, 0);
 			//data C = readCategories(folder, 5);
-			data R = readRatings(folder, 0.0, 0.0, false, 1);
+			//data R = readRatings(folder, 0.0, 0.0, false, 1);
 			//data BW = readReviewData(folder, 10, true, false, 0.0, 0.0);
 			//data UW = readReviewData(folder, 10, false, true, 0.0, 0.0);
 			
 			A.dataStats();
 			
 			Util.getMatrixDetails(A);
-			Util.getMatrixDetails(C);
-			Util.getMatrixDetails(R);
+			//Util.getMatrixDetails(C);
+//			//Util.getMatrixDetails(R);
 			//Util.getMatrixDetails(BW);
 					
 			
 			
-		}*/
+		}
 	
 }

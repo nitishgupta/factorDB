@@ -10,12 +10,17 @@
 
 ##### OUTPUTS the file in the same order, but tokenizes, removes punctuatuations, removes stop words and stems the words before outputing. Also each word in review occurs once in output.
 
+## Run from repo folder using
+# python PythonScripts/processReview.py option
+# option : all for processing four dataset(takes huge time)
+#	   ON  for eg. processing only ON (or any dataset for that matter of fact)		
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
 import string
 from nltk.stem import PorterStemmer
+import sys
 
 stemmer = PorterStemmer()
 
@@ -56,23 +61,48 @@ def getTokens(doc):
 	return token_no_stop
 
 
+def processData(folder):
+	filePath = "Dataset/data/"+folder
+	fin = open(filePath+'/reviews.txt', 'r')
+	fout = open(filePath+'/reviews_textProc.txt', 'w')
+	count = 0
 
-fin = open('reviews.txt', 'r')
-fout = open('reviews_textProc.txt', 'w')
-count = 0
-for line in fin: 
-#	print count
-	if(count %100000 == 0):
-		print count
-	if(line.strip().split(':')[0] == 'text'):
-		tokens =  getTokens(line.strip().split(':')[1])
-		tokenSet = set()
-		for i in tokens:
-			if (len(i) >= 3):
-				tokenSet.add(i)
-		fout.write("text : ")
-		fout.write(" ".join(tokenSet))
-		fout.write("\n\n")
-	else:
-		fout.write(line)
-	count = count + 1
+	for i, l in enumerate(fin):
+		pass
+
+	lines = i+1
+	perc = 1;
+	fin = open(filePath+'/reviews.txt', 'r')
+	for line in fin: 
+		if(line.strip().split(':')[0] == 'text'):
+			tokens =  getTokens(line.strip().split(':')[1])
+			tokenSet = set()
+			for i in tokens:
+				if (len(i) >= 3):
+					tokenSet.add(i)
+			fout.write("text : ")
+			fout.write(" ".join(tokenSet))
+			fout.write("\n\n")
+		else:
+			fout.write(line)
+		count = count + 1
+		if( (count % (lines/10) == 0) ):
+			p = str(perc*10) + "% done"
+			sys.stdout.write("\r"+p)
+			perc = perc + 1
+
+	print
+
+option = sys.argv[1]
+folders = ['EDH', 'AZ', 'ON', 'NV', 'WI']
+if(option == 'all'):
+	for folder in folders:
+		print folder, "processing"
+		processData(folder)	
+else:
+	processData(option)
+
+
+
+		
+		

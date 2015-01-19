@@ -1,0 +1,16 @@
+1. To Compile from Project folder.
+	For eg. 
+	javac -cp ../JSON-JAR/* -d bin src/yelpDataProcessing/AttributeCategory.java
+
+2. To run from Project Folder
+	For eg. 
+	java -cp ../JSON-JAR/*:bin/ yelpDataProcessing.AttributeCategory
+
+3. To process review files from python, from the main Repo folder
+	For eg.
+	python PythonScripts/processReview.py option
+	option values : 
+		all - process all 4 datasets - AZ, WI, NV, ON
+		ST Name - eg. AZ to process only AZ dataset
+
+

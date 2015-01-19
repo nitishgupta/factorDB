@@ -73,7 +73,7 @@ public class AttributeCategory {
 			}
 		}
 		//return categories;
-		System.out.println("Businesses Read  : " + count);
+		//System.out.println("Businesses Read  : " + count);
 	}
 	
 	private void buildThresholdCatSet(int thresh){
@@ -135,7 +135,7 @@ public class AttributeCategory {
 			}
 			count++;
 		}
-		System.out.println("No. of Business : "+count);
+		//System.out.println("No. of Business : "+count);
 		br.close();
 		bw.close();
 	}
@@ -280,30 +280,20 @@ public class AttributeCategory {
 	
 	
 	public static void main(String[] args) throws Exception{
-		System.out.println("Hello");
-		String State = "NV";
+		String State = "ON";	
+		String [] folders = {"ON", "AZ", "EDH", "WI", "NV", "complete"};
 		
 		AttributeCategory data = new AttributeCategory();
 
 		
 		// Read file for attributes and write to a file
-		data.readAttributes(State);
-		//data.printAttributes();
-		//data.buildBusiness_AttributeDataset(State);
-		
-		
-		data.buildCategorySet(State);
-		data.printCategories();
-		//data.writeResCatToFile(State);
-		
-		int c = 0;
-		
-		
-		//data.makeCitySet("yelp_dataset");
-		
-		
-		
-		
+		for(String state : folders){
+			System.out.println("Processing "+state);
+			data.readAttributes(state);
+			data.buildBusiness_AttributeDataset(state);
+			data.buildCategorySet(state);
+			data.writeResCatToFile(state);
+		}
 		
 	}
 

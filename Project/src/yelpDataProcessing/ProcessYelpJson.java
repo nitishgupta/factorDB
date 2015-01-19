@@ -83,7 +83,7 @@ public class ProcessYelpJson {
 			}
 		}
 		bw.close();
-		System.out.println("No. of Businesses in "+state + " : " + cr);
+		//System.out.println("No. of Businesses in "+state + " : " + cr);
 	}
 	
 	
@@ -137,7 +137,7 @@ public class ProcessYelpJson {
 			}
 		}
 		bw.close();
-		System.out.println("Reviews Count : " + count);
+		//System.out.println("No. of Review in "+ folder +" : " + count);
 		
 	}
 	
@@ -156,7 +156,7 @@ public class ProcessYelpJson {
 				busIds.add(bid);
 			}
 		}
-		System.out.println("Size of resIds set :" + busIds.size());
+		//System.out.println("Size of resIds set :" + busIds.size());
 	}
 	
 	public static void putReviewDatatoFile(String folder) throws IOException{
@@ -193,26 +193,29 @@ public class ProcessYelpJson {
 		}
 		br.close();
 		bw.close();
-		System.out.println("Reviews Written : " + count);
+		//System.out.println("Reviews Written : " + count);
 	}
 	
 	public static void main(String [] args) throws Exception{
 		String yelpDataset = "yelp_dataset";
-		String State = "NV";
+		String State = "ON";
+		String [] folders = {"ON", "AZ", "EDH", "WI", "NV"};
 		
 		ProcessYelpJson yelp = new ProcessYelpJson();
 		
 		
-		//yelp.createCompleteBusinessJson(yelpDataset);
+		yelp.createCompleteBusinessJson(yelpDataset);
+		yelp.createCompleteReviewJson(yelpDataset);
+		yelp.putReviewDatatoFile("complete");
+		
 		
 		//yelp.createRestaurantJson("complete");
-		yelp.createStateBusinessJson("complete", State);
-		
-		//yelp.createCompleteReviewJson(yelpDataset);
-		
-		yelp.createBusReviewJson("complete", State);
-		
-		yelp.putReviewDatatoFile(State);
+		for(String state : folders){
+			System.out.println("Processing "+state);
+			yelp.createStateBusinessJson("complete", state);
+			yelp.createBusReviewJson("complete", state);
+			yelp.putReviewDatatoFile(state);
+		}
 		
 		
 		

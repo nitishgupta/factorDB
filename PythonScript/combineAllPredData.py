@@ -1,4 +1,4 @@
-# From Logisitc CMF : python PythonScript/combineAllPredData.py Embeddings_Prediction_Data HeldOut
+# From Repo Folder : python PythonScript/combineAllPredData.py Embeddings_Prediction_Data HeldOut
 
 import sys
 import os
