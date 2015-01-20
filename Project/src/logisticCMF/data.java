@@ -199,7 +199,7 @@ public class data {
 		Collections.shuffle(trainData, seed);
 		Iterator<Cell> it = trainData.iterator();
 		int cellValidation = (int)((valPercentage/100)*Data.size());
-		System.out.println(cellValidation);
+		//System.out.println(cellValidation);
 		while(i < cellValidation){
 			Cell cell = it.next();
 			valData.add(cell);

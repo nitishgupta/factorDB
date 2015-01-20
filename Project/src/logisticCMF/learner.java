@@ -80,7 +80,6 @@ public class learner {
 			
 			trainData.clear();
 			trainData.addAll(Data.trainData);
-			System.out.println("Train Data Original : " + trainData.size());
 			if(busWord){
 				ArrayList<Cell> negSamples = Data.getNegativeSamples("b-word", busWordNegSamSize); 
 				trainData.addAll(negSamples);
@@ -89,8 +88,6 @@ public class learner {
 				ArrayList<Cell> negSamples = Data.getNegativeSamples("u-word", userWordNegSamSize); 
 				trainData.addAll(negSamples);
 			}
-			System.out.println("trainData : " + trainData.size());
-			codeTest.getMemoryDetails();
 			System.gc();
 			Collections.shuffle(trainData, seed);			// Shuffle List of Training Data before each iteration of learning parameters
 			for(Cell cell : trainData){
@@ -103,7 +100,7 @@ public class learner {
 			if(epoch%5 == 0){
 				System.out.println("################## Epoch : " + epoch + " ############");
 				evalMap = Eval.getEvalMap(Data, embedings, "validation");
-				Eval.printEval();
+				//Eval.printEval();
 				double wf1 = evalMap.get("average").get(3), wacc = evalMap.get("average").get(0); 
 				if(epoch == 5){
 					//maxF1 = wf1;	maxAcc = wacc;

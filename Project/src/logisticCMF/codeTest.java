@@ -77,21 +77,19 @@ public class codeTest {
 	}
 	
 	public static void completeEvaluation(String folder, data A, data C, data R, data W, boolean busWord, int bwNS, boolean userWord, int uwNS, 
-													boolean attCold, int coldIndexAtt, boolean rateCold, int coldIndexRate, String folderToWriteData) throws IOException{
+											String folderToWriteData) throws IOException{
 
-		System.out.print("Attribute Cold Start, ");
-		Util.checkColdStartSanity(A);
-		Util.implicitColdStart(A.trainData, A.testData);
-		System.out.print("Rate Cold Start, ");
-		Util.checkColdStartSanity(R);
-		Util.implicitColdStart(R.trainData, R.testData);
-		
+		String eval = folder + " - ";
 		ArrayList<data> tomerge = new ArrayList<data>();
 		data mergeData = new data();
 		
 		getMemoryDetails();
-		
-		System.out.println("###################################################  "+folder+"  - Att-Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + UW" + " ######################################");
 		tomerge.clear();
 		tomerge.add(A);
 		tomerge.add(W);
@@ -101,7 +99,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		embeddings e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"A-A", folder, A, e);
@@ -113,8 +110,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+BUW", folder, A, e);
 		getMemoryDetails();
 		
-		System.out.println("###################################################  "+folder+"  - Att-Cat-Word ######################################");
-		//rD = readReviewData(folder, 10, busWord, false, 0.0, 0.0);
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + C +BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -126,7 +127,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C", folder, A, e);
@@ -138,7 +138,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C+BUW", folder, A, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Rating - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(R);
@@ -149,7 +154,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"R-R", folder, R, e);
@@ -161,7 +165,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+BUW", folder, R, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Rating - Cat - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + C +BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(R);
@@ -173,7 +182,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+C", folder, R, e);
@@ -185,7 +193,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+C+BUW", folder, R, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Att Rate - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + R" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + R +BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + R + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -197,7 +210,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+R", folder, A, e);
@@ -218,7 +230,12 @@ public class codeTest {
 		System.gc();
 		
 		
-		System.out.println("###################################################  "+folder+"  - Att Cat Rate Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + C + R" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + C + R + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + C + R + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -231,7 +248,6 @@ public class codeTest {
 		mergeData.wordCount = W.wordCount;
 		mergeData.userWord = W.userWord; 
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C+R", folder, A, e);
@@ -275,22 +291,23 @@ public class codeTest {
 	}
 
 	public static void AttBusColdCompleteEvaluation(String folder, data A, data C, data R, data W, boolean busWord, int bwNS, boolean userWord, int uwNS, String folderToWriteData) throws IOException{
-		System.out.print("Attribute Cold Start, ");
-		Util.checkColdStartSanity(A);
-		Util.implicitColdStart(A.trainData, A.testData);
-		
+		String eval = folder + " - ";
 		ArrayList<data> tomerge = new ArrayList<data>();
 		data mergeData = new data();
 		
 		getMemoryDetails();
 		
-		System.out.println("###################################################  "+folder+"  - Att-Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + UW" + " ######################################");
 		tomerge.clear();
 		tomerge.add(A);
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		embeddings e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"A-A", folder, A, e);
@@ -302,7 +319,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+BUW", folder, A, e);
 		getMemoryDetails();
 		
-		System.out.println("###################################################  "+folder+"  - Att-Cat-Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + C + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -310,7 +332,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C", folder, A, e);
@@ -322,7 +343,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C+BUW", folder, A, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Att Rate - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + R" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + R + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + R + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -330,7 +356,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+R", folder, A, e);
@@ -347,7 +372,12 @@ public class codeTest {
 		System.gc();
 		
 		
-		System.out.println("###################################################  "+folder+"  - Att Cat Rate Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"A + R + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"A + R + C + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"A + R + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -356,7 +386,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"A-A+C+R", folder, A, e);
@@ -397,24 +426,23 @@ public class codeTest {
 	
 	public static void RateColdCompleteEvaluation(String folder, data A, data C, data R, data W, boolean busWord, int bwNS, boolean userWord, int uwNS, 
 													String folderToWriteData) throws IOException{
-		
-		System.out.print("Rate Cold Start, ");
-		Util.checkColdStartSanity(R);
-		Util.implicitColdStart(R.trainData, R.testData);
-		
+		String eval = folder + " - ";	
 		ArrayList<data> tomerge = new ArrayList<data>();
 		data mergeData = new data();
-		
 		getMemoryDetails();
 		
-		System.out.println("###################################################  "+folder+"  - Rating - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(R);
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		embeddings e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"R-R", folder, R, e);
@@ -426,7 +454,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+BUW", folder, R, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Rating - Cat - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + C + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(R);
@@ -434,7 +467,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord))
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+C", folder, R, e);
@@ -446,7 +478,12 @@ public class codeTest {
 			writeDataToFile.writePrediction(folderToWriteData+"R-R+C+BUW", folder, R, e);
 		System.gc();
 		
-		System.out.println("###################################################  "+folder+"  - Att Rate - Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R + A" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + A + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + A + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -454,7 +491,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"R-A+R", folder, R, e);
@@ -471,7 +507,12 @@ public class codeTest {
 		System.gc();
 		
 		
-		System.out.println("###################################################  "+folder+"  - Att Cat Rate Word ######################################");
+		if(!(busWord || userWord))
+			System.out.println("###################################################  "+ eval +"R + A + C" + " ######################################");
+		if(busWord && !userWord)
+			System.out.println("###################################################  "+ eval +"R + A + C + BW" + " ######################################");
+		if(userWord && !busWord)
+			System.out.println("###################################################  "+ eval +"R + A + C + UW" + " ######################################");
 		tomerge = new ArrayList<data>();
 		tomerge.clear();
 		tomerge.add(A);
@@ -480,7 +521,6 @@ public class codeTest {
 		tomerge.add(W);
 		mergeData = new data(W);
 		mergeData.addDataAfterSplit(tomerge);
-		mergeData.dataStats();
 		e = learnAndTest(mergeData, 30, busWord, bwNS, userWord, uwNS);
 		if(!(busWord || userWord)){
 			writeDataToFile.writePrediction(folderToWriteData+"R-A+C+R", folder, R, e);
@@ -520,6 +560,7 @@ public class codeTest {
 	}
 	
 	public static void performAttBusColdEvaluation(String folder) throws IOException{
+		System.out.println("Attribute Business Cold Start Evaluation");
 		String folderToWriteData = "AttBusCold/";
 		data A = readAttributes(folder, 15.0, 15.0, true, 0);
 		data C = readCategories(folder, 5);
@@ -548,6 +589,7 @@ public class codeTest {
 	}
 	
 	public static void performRateBusColdEvaluation(String folder) throws IOException{
+		System.out.println("Rating Business Cold Start Evaluation");
 		String folderToWriteData = "RateBusCold/";
 		data A = readAttributes(folder, 0.0, 0.0, false, 0);
 		data C = readCategories(folder, 5);
@@ -576,6 +618,7 @@ public class codeTest {
 	}
 	
 	public static void performRateUserColdEvaluation(String folder) throws IOException{
+		System.out.println("Rating User Cold Start Evaluation");
 		String folderToWriteData = "RateUserCold/";
 		data A = readAttributes(folder, 0.0, 0.0, false, 0);
 		data C = readCategories(folder, 5);
@@ -604,6 +647,7 @@ public class codeTest {
 	}
 	
 	public static void performHeldOutEvaluation(String folder) throws IOException{
+		System.out.println("Held Out Evaluation - Attribute and Rating");
 		String folderToWriteData = "HeldOut/";
 		data A = readAttributes(folder, 15.0, 15.0, false, 0);
 		data C = readCategories(folder, 5);
@@ -611,19 +655,19 @@ public class codeTest {
 		data W = new data();
 		
 		// No Words
-		completeEvaluation(folder, A, C, R, W, false, 0, false, 0, false, 0, false, 0, folderToWriteData);
+		completeEvaluation(folder, A, C, R, W, false, 0, false, 0, folderToWriteData);
 		System.gc();
 		
 		// Business - Words
 		W = readReviewData(folder, 10, true, false, 0.0, 0.0);
 		int bwNS = Util.getNegSampleSize(W);
-		completeEvaluation(folder, A, C, R, W, true, bwNS, false, 0, false, 0, false, 0, folderToWriteData);
+		completeEvaluation(folder, A, C, R, W, true, bwNS, false, 0, folderToWriteData);
 		System.gc();
 		
 		// User - Words
 		W = readReviewData(folder, 10, false, true, 0.0, 0.0);
 		int uwNS = Util.getNegSampleSize(W);
-		completeEvaluation(folder, A, C, R, W, false, 0, true, uwNS, false, 0, false, 0, folderToWriteData);
+		completeEvaluation(folder, A, C, R, W, false, 0, true, uwNS, folderToWriteData);
 		System.gc();
 		
 		// BusWords and UserWords
@@ -634,11 +678,12 @@ public class codeTest {
 	}
 	
 	// To test one dataset completely and write embeddings for (A + R + C + W)
-	/*public static void main(String [] args) throws Exception {
+	
+	public static void main(String [] args) throws Exception {
 		String folder = args[0];
 		String todo = args[1];
-		todo = "heldOut";
-		folder = "EDH";
+		//todo = "rateBusCold";
+		//folder = "EDH";
 		
 		if(todo.equals("heldOut"))
 			performHeldOutEvaluation(folder);
@@ -648,31 +693,29 @@ public class codeTest {
 			performRateBusColdEvaluation(folder);
 		if(todo.equals("rateUserCold"))
 			performRateUserColdEvaluation(folder);
-		//attBusColdEvaluations(folder);
-		//rateBusColdEvaluations(folder);
-	}*/
+	}
 	
 	
 	
 	// To make the sizes table
-		public static void main(String [] args) throws Exception {
-			
-			String folder = "EDH";
-			data A = readAttributes(folder, 0.0, 0.0, false, 0);
-			//data C = readCategories(folder, 5);
-			//data R = readRatings(folder, 0.0, 0.0, false, 1);
-			//data BW = readReviewData(folder, 10, true, false, 0.0, 0.0);
-			//data UW = readReviewData(folder, 10, false, true, 0.0, 0.0);
-			
-			A.dataStats();
-			
-			Util.getMatrixDetails(A);
-			//Util.getMatrixDetails(C);
+	/*public static void main(String [] args) throws Exception {
+		
+		String folder = "EDH";
+		data A = readAttributes(folder, 0.0, 0.0, false, 0);
+		//data C = readCategories(folder, 5);
+		//data R = readRatings(folder, 0.0, 0.0, false, 1);
+		//data BW = readReviewData(folder, 10, true, false, 0.0, 0.0);
+		//data UW = readReviewData(folder, 10, false, true, 0.0, 0.0);
+		
+		A.dataStats();
+		
+		Util.getMatrixDetails(A);
+		//Util.getMatrixDetails(C);
 //			//Util.getMatrixDetails(R);
-			//Util.getMatrixDetails(BW);
-					
-			
-			
-		}
+		//Util.getMatrixDetails(BW);
+				
+		
+		
+	}*/
 	
 }

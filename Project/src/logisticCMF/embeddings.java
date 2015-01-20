@@ -23,7 +23,6 @@ public class embeddings {
 				embs.get(entityId).addRelation(cell.relation_id);
 			}
 		}
-		System.out.println("Unique Entites in Database : " + embs.keySet().size());
 		computeAlpha(YData);
 	}
 	
