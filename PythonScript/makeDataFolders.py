@@ -3,7 +3,7 @@ import sys
 import os
 from os import walk
 
-dataset = "Dataset1/"
+dataset = "Dataset/"
 
 folders = ['AZ', 'NV', 'WI', 'EDH', 'ON', 'complete']
 
@@ -26,6 +26,33 @@ for folder in folders:
 for folder in folders:
 	if not os.path.exists(dataset+"data/"+folder):
 		os.makedirs(dataset+"data/"+folder)
-		os.makedirs(dataset+"data/"+folder+"/embeddings")
-		os.makedirs(dataset+"data/"+folder+"/pred-data")
+
+
+em_pred = "Embeddings_Prediction_Data/"
+evs = ['AttBusCold', 'RateBusCold', 'RateUserCold', 'HeldOut']
+
+if not os.path.exists(em_pred):
+	os.makedirs(em_pred)
+
+if not os.path.exists(em_pred+"All"):
+	os.makedirs(em_pred+"All")
+	os.makedirs(em_pred+"All/"+"pred-data")
+	for ev in evs:
+		os.makedirs(em_pred+"All"+"/pred-data/"+ev)		
+
+
+
+for folder in folders:
+	if not os.path.exists(em_pred+folder):
+		os.makedirs(em_pred+folder)	
+		os.makedirs(em_pred+folder+"/pred-data")
+		for ev in evs:
+			os.makedirs(em_pred+folder+"/pred-data/"+ev)		
+		os.makedirs(em_pred+folder+"/embeddings")
+		for ev in evs:
+			os.makedirs(em_pred+folder+"/embeddings/"+ev)		
+							
+	
+
+
 
